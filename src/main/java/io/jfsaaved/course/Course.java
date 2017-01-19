@@ -1,25 +1,32 @@
-package io.jfsaaved.topic;
+package io.jfsaaved.course;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import io.jfsaaved.topic.Topic;
 
 @Entity
-public class Topic {
+public class Course {
 	
 	@Id
 	private String id;
 	private String name;
 	private String description;
 	
-	public Topic() {
+	@ManyToOne
+	private Topic topic;
+	
+	public Course() {
 		
 	}
 	
-	public Topic(String id, String name, String description) {
+	public Course(String id, String name, String description, String topicId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.topic = new Topic(topicId, "", "");
 	}
 	
 	public String getId() {
@@ -44,6 +51,14 @@ public class Topic {
 	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 	
 	
